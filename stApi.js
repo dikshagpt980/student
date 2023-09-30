@@ -53,7 +53,7 @@ let {customers,students,courses,faculties,classes} = require("./studentApiData.j
       let a = {}
       a.id = MaxId+1;
       a.name = req.body.name;
-      a.course = [];
+      a.courses = [];
       faculties.unshift(a);
     }
     const ragisterRes = {
@@ -63,8 +63,6 @@ let {customers,students,courses,faculties,classes} = require("./studentApiData.j
     }
     res.send(ragisterRes);
  });
-
- 
 
  app.get("/getCourses",function(req,res){
     res.send(courses);
@@ -115,7 +113,6 @@ let {customers,students,courses,faculties,classes} = require("./studentApiData.j
    let page = +req.query.page;
    let course = req.query.course;
    let arr = course?course.split(","):[];
-  //  console.log(arr)
    let items = [];
    let data = arr.length>0?
                 faculties.filter((ele)=>arr.findIndex((ar)=> ele.courses.findIndex((st)=> st===ar)>=0)>=0)
